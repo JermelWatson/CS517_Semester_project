@@ -21,16 +21,16 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
 
         # Calculate slopes (m = Δy / Δx)
         slopes = delta_y / delta_t
-        slopes1.append(slopes)
+        slopes1.append(slope)
 
         # Calculate y-intercepts (y_intercept = y - mx)
         y_intercepts = temps_np[:-1] - slopes * times_np[:-1]
-        intercepts.append(y_intercepts)
+        intercepts.
 
         # Print slopes and intercepts
-        #for slope, y_intcpt in zip(slopes, y_intercepts):
-        #    print(f"{slope=}, {y_intcpt=}")
-        return(slopes1, intercepts)
+        for slope, y_intcpt in zip(slopes, y_intercepts):
+            print(f"{slope=}, {y_intcpt=}")
+
 
 if __name__ == "__main__":
     print_greeting()

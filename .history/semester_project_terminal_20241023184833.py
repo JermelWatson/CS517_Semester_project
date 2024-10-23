@@ -1,7 +1,7 @@
 from src import parse_temps
 import sys
 import math
-import numpy as np
+import NumPy as np
 
 def print_greeting():
     print("Hello world")
@@ -10,9 +10,6 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
     # Convert input lists to NumPy arrays
     times_np = np.array(times)
     temps_np = np.array(temps)
-    
-    slopes1 = []
-    intercepts = []
 
     if len(times_np) == len(temps_np) and len(times_np) > 1:
         # Calculate the differences in temps and times
@@ -21,16 +18,14 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
 
         # Calculate slopes (m = Δy / Δx)
         slopes = delta_y / delta_t
-        slopes1.append(slopes)
 
         # Calculate y-intercepts (y_intercept = y - mx)
         y_intercepts = temps_np[:-1] - slopes * times_np[:-1]
-        intercepts.append(y_intercepts)
 
         # Print slopes and intercepts
-        #for slope, y_intcpt in zip(slopes, y_intercepts):
-        #    print(f"{slope=}, {y_intcpt=}")
-        return(slopes1, intercepts)
+        for slope, y_intcpt in zip(slopes, y_intercepts):
+            print(f"{slope=}, {y_intcpt=}")
+
 
 if __name__ == "__main__":
     print_greeting()
@@ -59,5 +54,4 @@ if __name__ == "__main__":
 
             # Print the time step and temperatures
             #print((time_step, temps))
-    core_0_slope, core_0_y_incept = compute_line_interpolation(times=times, temps=core_3)
-    print(core_0_slope)
+    print(times)

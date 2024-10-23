@@ -12,7 +12,7 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
     temps_np = np.array(temps)
     
     slopes1 = []
-    intercepts = []
+    intercepts
 
     if len(times_np) == len(temps_np) and len(times_np) > 1:
         # Calculate the differences in temps and times
@@ -21,16 +21,14 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
 
         # Calculate slopes (m = Δy / Δx)
         slopes = delta_y / delta_t
-        slopes1.append(slopes)
 
         # Calculate y-intercepts (y_intercept = y - mx)
         y_intercepts = temps_np[:-1] - slopes * times_np[:-1]
-        intercepts.append(y_intercepts)
 
         # Print slopes and intercepts
-        #for slope, y_intcpt in zip(slopes, y_intercepts):
-        #    print(f"{slope=}, {y_intcpt=}")
-        return(slopes1, intercepts)
+        for slope, y_intcpt in zip(slopes, y_intercepts):
+            print(f"{slope=}, {y_intcpt=}")
+
 
 if __name__ == "__main__":
     print_greeting()
