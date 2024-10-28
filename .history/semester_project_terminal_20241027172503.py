@@ -31,6 +31,30 @@ def compute_line_interpolation(times: list[float], temps: list[float]):
         #for slope, y_intcpt in zip(slopes, y_intercepts):
         #    print(f"{slope=}, {y_intcpt=}")
         return(slopes1, intercepts)
+def least_squares_approximation(times: list[float], temps: list[float]):
+    if len(times) == len(temps) and len(times) > 1:
+        # Number of data points
+        n = len(times)
+        
+        # Calculating the sums needed for the formulas
+        sum_x = sum(times)
+        sum_y = sum(temps)
+        sum_xy = sum(x * y for x, y in zip(times, temps))
+        sum_x_squared = sum(x**2 for x in times)
+        
+        # Calculating the slope (m) and y-intercept (b)
+        m = (n * sum_xy - sum_x * sum_y) / (n * sum_x_squared - sum_x**2)
+        b = (sum_y - m * sum_x) / n
+        
+        # Return the slope and y-intercept
+        return m, b
+    else:
+        raise ValueError("The number of time and temperature values must be the same and greater than one.")
+
+def evaluate_least_squares(times: list[float], slope: float, y_intercept: float):
+    # Calculate the fitted values for the given times
+    fitted_values = [slope * x + y_intercept for x in times]
+    return fitted_values
 
 if __name__ == "__main__":
     print_greeting()
@@ -57,24 +81,7 @@ if __name__ == "__main__":
                 core_2.append(temps[2])
                 core_3.append(temps[3])
 
-        # Compute the piecewise linear interpolation for core_3
-    core_0_slope, core_0_y_intercept = compute_line_interpolation(times=times, temps=core_0)
-    core_1_slope, core_1_y_intercept = compute_line_interpolation(times=times, temps=core_1)
-    core_2_slope, core_2_y_intercept = compute_line_interpolation(times=times, temps=core_2)
-    core_3_slope, core_3_y_intercept = compute_line_interpolation(times=times, temps=core_3)
-    
-    # Print slopes and corresponding time ranges
-    # First, determine the maximum length of the slope string with a sign
-max_slope_length = max(len(f"{slope:.4f}") for slope in core_0_slope)  # Including the negative sign
-
-for i in range(min(len(core_0_slope), 1000)):  # Loop over the slopes, up to 1000
-    t0 = times[i]        # Current time
-    t1 = times[i + 1]    # Next time
-    slope = core_0_slope[i]
-    
-    # Format slope and determine if it has a negative sign
-    slope_str = f"{slope:.4f}"  # Format the slope to four decimal places
-    slope_display = slope_str.lstrip('-')  # Remove the negative sign for display alignment
-    
-    # Print with specified width for alignment
-    print(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t{slope_str:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}")
+            # Print the time step and temperatures
+            #print((time_step, temps))
+    core_0_slope, core_0_y_incept = compute_line_interpolation(times=times, temps=core_3)
+    print(core_0_slope)

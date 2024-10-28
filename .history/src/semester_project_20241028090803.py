@@ -26,7 +26,7 @@ def compute_piecewise_linear_interpolation(times: list[float], temps: list[float
 
 def save_to_file(core: list[float], slope: list[float], times: list[float], core_idx: int):
 
-    newFile = open("output-core-0" + str(core_idx) + ".txt", "w")
+    newFile = open("test_input_core-0" + str(core_idx) + ".txt", "x")
     
     max_slope_length = max(len(f"{slp:.4f}") for slp in slope)  # Including the negative sign
     
@@ -77,6 +77,3 @@ if __name__ == "__main__":
     # Print slopes and corresponding time ranges
     # First, determine the maximum length of the slope string with a sign
     save_to_file(core=core_0, slope=core_0_slope, times=times, core_idx=0)
-    save_to_file(core=core_1, slope=core_1_slope, times=times, core_idx=1)
-    save_to_file(core=core_2, slope=core_2_slope, times=times, core_idx=2)
-    save_to_file(core=core_3, slope=core_3_slope, times=times, core_idx=3)

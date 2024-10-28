@@ -60,8 +60,8 @@ if __name__ == "__main__":
         # Compute the piecewise linear interpolation for core_3
     core_0_slope, core_0_y_intercept = compute_line_interpolation(times=times, temps=core_0)
     core_1_slope, core_1_y_intercept = compute_line_interpolation(times=times, temps=core_1)
-    core_2_slope, core_2_y_intercept = compute_line_interpolation(times=times, temps=core_2)
-    core_3_slope, core_3_y_intercept = compute_line_interpolation(times=times, temps=core_3)
+    core_2_slope, core_2_y_intercept = compute_piecewise_linear_interpolation(times=times, temps=core_2)
+    core_3_slope, core_3_y_intercept = compute_piecewise_linear_interpolation(times=times, temps=core_3)
     
     # Print slopes and corresponding time ranges
     # First, determine the maximum length of the slope string with a sign

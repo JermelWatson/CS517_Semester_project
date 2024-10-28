@@ -65,16 +65,16 @@ if __name__ == "__main__":
     
     # Print slopes and corresponding time ranges
     # First, determine the maximum length of the slope string with a sign
-max_slope_length = max(len(f"{slope:.4f}") for slope in core_0_slope)  # Including the negative sign
+    max_slope_length = max(len(f"{slope:.4f}") for slope in core_0_slope.flatten())  # Including the negative sign
 
-for i in range(min(len(core_0_slope), 1000)):  # Loop over the slopes, up to 1000
-    t0 = times[i]        # Current time
-    t1 = times[i + 1]    # Next time
-    slope = core_0_slope[i]
-    
-    # Format slope and determine if it has a negative sign
-    slope_str = f"{slope:.4f}"  # Format the slope to four decimal places
-    slope_display = slope_str.lstrip('-')  # Remove the negative sign for display alignment
-    
-    # Print with specified width for alignment
-    print(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t{slope_str:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}")
+    for i in range(min(len(core_0_slope))):  # Loop over the slopes, up to 1000
+        t0 = times[i]        # Current time
+        t1 = times[i + 1]    # Next time
+        slope = core_0_slope[i]
+        
+        # Format slope and determine if it has a negative sign
+        slope_str = f"{slope:.4f}"  # Format the slope to four decimal places
+        slope_display = slope_str.lstrip('-')  # Remove the negative sign for display alignment
+        
+        # Print with specified width for alignment
+        print(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t{slope_display:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}")

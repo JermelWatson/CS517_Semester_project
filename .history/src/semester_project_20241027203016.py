@@ -24,25 +24,8 @@ def compute_piecewise_linear_interpolation(times: list[float], temps: list[float
     else:
         raise ValueError("The number of time and temperature values must be the same and greater than one.")
 
-def save_to_file(core: list[float], slope: list[float], times: list[float], core_idx: int):
-
-    newFile = open("output-core-0" + str(core_idx) + ".txt", "w")
+def save_to_file(core: list[float], slope: list[float], times: list[float]):
     
-    max_slope_length = max(len(f"{slp:.4f}") for slp in slope)  # Including the negative sign
-    
-    for i in range(len(slope)):# Loop over the slopes
-        t0 = times[i]        # Current time
-        t1 = times[i + 1]    # Next time
-        curr_slope = slope[i]
-        
-        # Format slope and determine if it has a negative sign
-        slope_str = f"{curr_slope:.4f}"  # Format the slope to four decimal places
-        
-        # Print with specified width for alignment
-        #print(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t{slope_str:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}")
-        newFile.write(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core[i]:>10.4f} + \t\t\t{slope_str:>{max_slope_length}}{' x ; interpolation' if curr_slope >= 0 else ' x ; interpolation'}\n")
-        #Send data to file
-    newFile.close()
     
     pass
 if __name__ == "__main__":
@@ -76,7 +59,22 @@ if __name__ == "__main__":
     
     # Print slopes and corresponding time ranges
     # First, determine the maximum length of the slope string with a sign
-    save_to_file(core=core_0, slope=core_0_slope, times=times, core_idx=0)
-    save_to_file(core=core_1, slope=core_1_slope, times=times, core_idx=1)
-    save_to_file(core=core_2, slope=core_2_slope, times=times, core_idx=2)
-    save_to_file(core=core_3, slope=core_3_slope, times=times, core_idx=3)
+newFile = open("test_input_core-00.txt", "x")
+
+max_slope_length = max(len(f"{slope:.4f}") for slope in core_0_slope)  # Including the negative sign
+
+newFile = open("test_input_core-0" + str(i) + ".txt", "x")
+for i in range(min(len(core_0_slope), 1000)):  # Loop over the slopes, up to 1000
+    t0 = times[i]        # Current time
+    t1 = times[i + 1]    # Next time
+    slope = core_0_slope[i]
+    
+    # Format slope and determine if it has a negative sign
+    slope_str = f"{slope:.4f}"  # Format the slope to four decimal places
+    slope_display = slope_str.lstrip('-')  # Remove the negative sign for display alignment
+    
+    # Print with specified width for alignment
+    #print(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t{slope_str:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}")
+    newFile.write(f"{t0:>3} <= x <= \t{t1:>10}; y = \t{core_0[i]:>10.4f} + \t\t\t{slope_str:>{max_slope_length}}{' x ; interpolation' if slope >= 0 else ' x ; interpolation'}\n")
+    #Send data to file
+newFile.close()

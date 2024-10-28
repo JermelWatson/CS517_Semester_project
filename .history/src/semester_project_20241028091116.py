@@ -77,6 +77,6 @@ if __name__ == "__main__":
     # Print slopes and corresponding time ranges
     # First, determine the maximum length of the slope string with a sign
     save_to_file(core=core_0, slope=core_0_slope, times=times, core_idx=0)
-    save_to_file(core=core_1, slope=core_1_slope, times=times, core_idx=1)
-    save_to_file(core=core_2, slope=core_2_slope, times=times, core_idx=2)
-    save_to_file(core=core_3, slope=core_3_slope, times=times, core_idx=3)
+    save_to_file(core=core_1, slope=core_0_slope, times=times, core_idx=0)
+    save_to_file(core=core_0, slope=core_0_slope, times=times, core_idx=0)
+    save_to_file(core=core_0, slope=core_0_slope, times=times, core_idx=0)
